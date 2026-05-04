@@ -6,10 +6,10 @@ var echo_scene: PackedScene
 var active_echoes: Array = []
 
 signal echo_spawned(position: Vector2)
-signal echo_consumed(echo: Echo)
+signal echo_consumed(echo: EchoImproved)
 
 func _ready():
-	echo_scene = load("res://src/scenes/echo.tscn")
+	echo_scene = load("res://src/scenes/echo_improved.tscn")
 
 func spawn_echo(position: Vector2):
 	if echo_scene:
@@ -22,7 +22,7 @@ func spawn_echo(position: Vector2):
 		return echo
 	return null
 
-func _on_echo_collected(echo: Echo):
+func _on_echo_collected(echo: EchoImproved):
 	if echo in active_echoes:
 		active_echoes.erase(echo)
 		emit_signal("echo_consumed", echo)

@@ -2,7 +2,12 @@ extends Node
 
 class_name WaveManager
 
-var enemy_scene: PackedScene
+var enemy_scenes: Array = [
+	"res://src/scenes/enemy_specter_improved.tscn",
+	"res://src/scenes/enemy_bloat_improved.tscn",
+	"res://src/scenes/enemy_spinner_improved.tscn",
+]
+
 var current_wave: int = 0
 var enemies_spawned: int = 0
 var enemies_defeated: int = 0
@@ -12,9 +17,6 @@ var spawn_timer: float = 0.0
 signal wave_started(wave: int)
 signal wave_completed(wave: int)
 signal boss_approaching(wave: int)
-
-func _ready():
-	enemy_scene = load("res://src/scenes/enemy_specter.tscn")
 
 func _process(delta):
 	if wave_active and spawn_timer > 0:
@@ -37,12 +39,15 @@ func _spawn_enemies():
 		_spawn_random_enemy()
 
 func _spawn_random_enemy():
-	var position = _get_random_spawn_position()
-	var enemy = enemy_scene.instantiate()
-	enemy.global_position = position
-	get_parent().add_child(enemy)
-	enemies_spawned += 1
-	enemy.defeated.connect(_on_enemy_defeated)
+	var scene_path = enemy_scenes[randi() % enemy_scenes.size()]
+	var scene = load(scene_path)
+	if scene:
+		var position = _get_random_spawn_position()
+		var enemy = scene.instantiate()
+		enemy.global_position = position
+		get_parent().add_child(enemy)
+		enemies_spawned += 1
+		enemy.defeated.connect(_on_enemy_defeated)
 
 func _get_random_spawn_position() -> Vector2:
 	var x = randf_range(50, Constants.WINDOW_WIDTH - 50)

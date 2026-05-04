@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://cn4wlf5q5l5q5"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd"]
-[ext_resource type="Script" path="res://src/entities/player.gd"]
+[ext_resource type="Script" path="res://src/entities/player_improved.gd"]
 [ext_resource type="Script" path="res://src/systems/wave_manager.gd"]
 [ext_resource type="Script" path="res://src/systems/echo_system.gd"]
 [ext_resource type="Script" path="res://src/systems/upgrade_manager.gd"]
