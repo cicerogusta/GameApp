@@ -1,0 +1,35 @@
+# Godot
+.godot/
+*.godot
+*.import
+*.tres.uuid
+
+# Build
+build/
+dist/
+*.exe
+*.pck
+*.zip
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+npm-debug.log
+
+# Env
+.env
+.env.local
