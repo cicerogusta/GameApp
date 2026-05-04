@@ -1,11 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn4wlf5q5l5q5"]
+[gd_scene load_steps=10 format=3 uid="uid://cn4wlf5q5l5q5"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd"]
 [ext_resource type="Script" path="res://src/entities/player.gd"]
 [ext_resource type="Script" path="res://src/systems/wave_manager.gd"]
 [ext_resource type="Script" path="res://src/systems/echo_system.gd"]
 [ext_resource type="Script" path="res://src/systems/upgrade_manager.gd"]
-[ext_resource type="Script" path="res://src/ui/hud.gd"]
+[ext_resource type="Script" path="res://src/ui/hud_improved.gd"]
+[ext_resource type="Script" path="res://src/ui/pause_menu.gd"]
+[ext_resource type="Script" path="res://src/ui/upgrade_selection.gd"]
+[ext_resource type="Script" path="res://src/ui/visual_feedback.gd"]
+[ext_resource type="Script" path="res://src/ui/wave_indicator.gd"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1")
@@ -39,3 +43,104 @@ script = ExtResource("5")
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 100
 script = ExtResource("6")
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+layer = 101
+script = ExtResource("7")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
+visible = false
+layout_mode = 1
+anchors_left = 0.25
+anchors_top = 0.2
+anchors_right = 0.75
+anchors_bottom = 0.8
+
+[node name="PausePanel" type="StyleBoxFlat" parent="PauseMenu/PanelContainer"]
+bg_color = Color(0.08, 0.08, 0.12, 0.95)
+border_color = Color(0.157, 0, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_left = 8
+corner_radius_bottom_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PauseLabel" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "PAUSADO"
+theme_override_font_sizes/font_size = 60
+theme_override_colors/font_color = Color(0.157, 0, 1, 1)
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="PauseMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "CONTINUAR (ESC)"
+theme_override_font_sizes/font_size = 24
+custom_minimum_size = Vector2(300, 60)
+
+[node name="SettingsButton" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "CONFIGURAÇÕES"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(300, 50)
+
+[node name="MenuButton" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "MENU PRINCIPAL"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(300, 50)
+
+[node name="UpgradeSelection" type="CanvasLayer" parent="."]
+layer = 102
+script = ExtResource("8")
+
+[node name="PanelContainer" type="PanelContainer" parent="UpgradeSelection"]
+visible = false
+layout_mode = 1
+anchors_left = 0.1
+anchors_top = 0.15
+anchors_right = 0.9
+anchors_bottom = 0.85
+
+[node name="UpgradePanel" type="StyleBoxFlat" parent="UpgradeSelection/PanelContainer"]
+bg_color = Color(0.08, 0.08, 0.12, 0.95)
+border_color = Color(0, 0.85, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UpgradeSelection/PanelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="UpgradeSelection/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "ESCOLHA SEU UPGRADE"
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0, 0.85, 1, 1)
+horizontal_alignment = 1
+
+[node name="UpgradesContainer" type="GridContainer" parent="UpgradeSelection/PanelContainer/VBoxContainer"]
+layout_mode = 2
+columns = 3
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+
+[node name="VisualFeedback" type="CanvasLayer" parent="."]
+layer = 99
+script = ExtResource("9")
+
+[node name="WaveIndicator" type="CanvasLayer" parent="."]
+layer = 50
+script = ExtResource("10")

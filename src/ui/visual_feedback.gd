@@ -1,0 +1,67 @@
+extends CanvasLayer
+
+class_name VisualFeedback
+
+var damage_popup_scene: PackedScene
+
+func _ready():
+	pass
+
+func show_damage_number(position: Vector2, damage: int, is_critical: bool = false):
+	var label = Label.new()
+	label.text = str(damage)
+	label.add_theme_font_size_override("font_size", 24 if not is_critical else 32)
+	label.add_theme_color_override("font_color", Color(1, 0.4, 0, 1) if not is_critical else Color(1, 1, 0, 1))
+	label.position = position
+	add_child(label)
+
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(label, "position:y", position.y - 50, 0.6)
+	tween.set_parallel(true)
+	tween.tween_property(label, "modulate:a", 0.0, 0.6)
+	await tween.finished
+	label.queue_free()
+
+func screen_shake(intensity: float = 0.5, duration: float = 0.1):
+	var camera = get_viewport().get_camera_2d()
+	if camera:
+		var original_pos = camera.global_position
+		for i in range(int(duration * 60)):
+			camera.global_position = original_pos + Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
+			await get_tree().process_frame
+		camera.global_position = original_pos
+
+func flash_screen(color: Color, duration: float = 0.2):
+	var rect = ColorRect.new()
+	rect.color = color
+	rect.anchors_rect = Rect2(0, 0, 1, 1)
+	add_child(rect)
+
+	var tween = create_tween()
+	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.set_ease(Tween.EASE_OUT)
+	tween.tween_property(rect, "modulate:a", 0.0, duration)
+	await tween.finished
+	rect.queue_free()
+
+func particle_burst(position: Vector2, color: Color, count: int = 10):
+	for i in range(count):
+		var particle = ColorRect.new()
+		particle.size = Vector2(4, 4)
+		particle.color = color
+		particle.position = position
+		add_child(particle)
+
+		var angle = TAU * i / count
+		var velocity = Vector2(cos(angle), sin(angle)) * 200
+
+		var tween = create_tween()
+		tween.set_trans(Tween.TRANS_CUBIC)
+		tween.set_ease(Tween.EASE_OUT)
+		tween.tween_property(particle, "position", position + velocity * 0.3, 0.3)
+		tween.set_parallel(true)
+		tween.tween_property(particle, "modulate:a", 0.0, 0.3)
+		await tween.finished
+		particle.queue_free()

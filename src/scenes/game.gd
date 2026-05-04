@@ -1,10 +1,11 @@
 extends Node2D
 
 var player: Player = null
-var hud: GameHUD = null
+var hud: GameHUDImproved = null
 var wave_manager: WaveManager = null
 var echo_system: EchoSystem = null
 var upgrade_manager: UpgradeManager = null
+var pause_menu: PauseMenu = null
 var save_manager: SaveManager = null
 
 var game_active: bool = false
@@ -19,9 +20,14 @@ func _ready():
 	wave_manager = $WaveManager
 	echo_system = $EchoSystem
 	upgrade_manager = $UpgradeManager
+	pause_menu = $PauseMenu
+	hud = $HUD
 
 	save_manager = SaveManager.new()
 	add_child(save_manager)
+
+	if pause_menu:
+		pause_menu.pause_toggled.connect(_on_pause_toggled)
 
 	game_active = true
 	GameState.reset_run()
@@ -29,17 +35,14 @@ func _ready():
 	wave_timer = 2.0
 
 func _process(delta):
-	if Input.is_action_just_pressed("pause"):
-		_toggle_pause()
-
-	if game_active:
+	if game_active and not get_tree().paused:
 		wave_timer -= delta
 		if wave_timer <= 0 and not wave_manager.wave_active:
 			wave_manager.start_wave()
 			wave_timer = 30.0
 
 func _on_player_attack(position: Vector2, direction: Vector2):
-	if not game_active:
+	if not game_active or get_tree().paused:
 		return
 
 	var enemies = get_tree().get_nodes_in_group("enemy")
@@ -54,11 +57,14 @@ func _is_in_attack_direction(from: Vector2, direction: Vector2, target: Node2D) 
 	var to_target = (target.global_position - from).normalized()
 	return direction.dot(to_target) > 0.5
 
+func _on_pause_toggled(paused: bool):
+	if paused:
+		game_active = false
+	else:
+		game_active = true
+
 func _on_player_died():
 	game_active = false
 	save_manager.save_game()
 	await get_tree().create_timer(0.5).timeout
 	get_tree().change_scene_to_file("res://src/scenes/game_over.tscn")
-
-func _toggle_pause():
-	get_tree().paused = !get_tree().paused
