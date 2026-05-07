@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name GameScene
+
 var player: PlayerImproved = null
 var hud: GameHUDImproved = null
 var wave_manager: WaveManager = null
