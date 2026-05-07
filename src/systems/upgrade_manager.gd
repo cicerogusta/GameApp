@@ -35,6 +35,12 @@ func apply_upgrade(upgrade: Dictionary):
 	if upgrade in available_upgrades:
 		GameState.add_upgrade(upgrade["name"])
 		emit_signal("upgrade_selected", upgrade)
+
+		# Play level-up sound
+		var audio_mgr = get_tree().root.get_node("Game/AudioManager")
+		if audio_mgr:
+			audio_mgr.play_sfx("levelup", 0.0)
+
 		return true
 	return false
 

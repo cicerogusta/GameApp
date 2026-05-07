@@ -73,6 +73,11 @@ func _play_hit_feedback():
 	if feedback:
 		feedback.screen_shake(0.15, 0.05)
 
+	# Play hit SFX
+	var audio_mgr = get_tree().root.get_node("Game/AudioManager")
+	if audio_mgr:
+		audio_mgr.play_sfx("hit", -3.0)
+
 func die():
 	if is_alive:
 		is_alive = false

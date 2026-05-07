@@ -7,6 +7,7 @@ var echo_system: EchoSystem = null
 var upgrade_manager: UpgradeManager = null
 var pause_menu: PauseMenu = null
 var save_manager: SaveManager = null
+var audio_manager: AudioManagerPro = null
 
 var game_active: bool = false
 var wave_timer: float = 0.0
@@ -16,18 +17,24 @@ func _ready():
 	if player:
 		player.attack_performed.connect(_on_player_attack)
 		player.died.connect(_on_player_died)
+		player.took_damage.connect(_on_player_took_damage)
 
 	wave_manager = $WaveManager
 	echo_system = $EchoSystem
 	upgrade_manager = $UpgradeManager
 	pause_menu = $PauseMenu
 	hud = $HUD
+	audio_manager = $AudioManager
 
 	save_manager = SaveManager.new()
 	add_child(save_manager)
 
 	if pause_menu:
 		pause_menu.pause_toggled.connect(_on_pause_toggled)
+
+	if audio_manager:
+		audio_manager.play_music("background", -5.0)
+		echo_system.echo_spawned.connect(func(_pos): audio_manager.play_sfx("echo_collect", 0.0))
 
 	game_active = true
 	GameState.reset_run()
@@ -44,6 +51,9 @@ func _process(delta):
 func _on_player_attack(position: Vector2, direction: Vector2):
 	if not game_active or get_tree().paused:
 		return
+
+	if audio_manager:
+		audio_manager.play_sfx("attack", 0.0)
 
 	var enemies = get_tree().get_nodes_in_group("enemy")
 	for enemy in enemies:
@@ -63,7 +73,13 @@ func _on_pause_toggled(paused: bool):
 	else:
 		game_active = true
 
+func _on_player_took_damage():
+	if audio_manager:
+		audio_manager.play_sfx("hit", -3.0)
+
 func _on_player_died():
+	if audio_manager:
+		audio_manager.play_sfx("death", 0.0)
 	game_active = false
 	save_manager.save_game()
 	await get_tree().create_timer(0.5).timeout
