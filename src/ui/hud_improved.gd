@@ -9,7 +9,7 @@ var wave_icon: Label
 var coins_icon: Label
 var health_icon: Label
 
-var player_ref: Player
+var player_ref: PlayerImproved
 
 func _ready():
 	player_ref = get_tree().get_first_child_in_group("player")
