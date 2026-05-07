@@ -20,28 +20,24 @@ func _ready():
 	print("=== GAME STARTING ===")
 
 	player = $Player
-	print("Player: ", player)
+	print("Player loaded: ", player != null)
 	if player:
+		print("Connecting player signals...")
 		player.attack_performed.connect(_on_player_attack)
 		player.died.connect(_on_player_died)
 		player.took_damage.connect(_on_player_took_damage)
+		print("Player signals connected")
 
 	wave_manager = $WaveManager
-	print("WaveManager: ", wave_manager)
 	echo_system = $EchoSystem
-	print("EchoSystem: ", echo_system)
 	upgrade_manager = $UpgradeManager
-	print("UpgradeManager: ", upgrade_manager)
 	pause_menu = $PauseMenu
-	print("PauseMenu: ", pause_menu)
 	wave_indicator = $WaveIndicator
-	print("WaveIndicator: ", wave_indicator)
 	upgrade_selection = $UpgradeSelection
-	print("UpgradeSelection: ", upgrade_selection)
 	hud = $HUD
-	print("HUD: ", hud)
 	audio_manager = $AudioManager
-	print("AudioManager: ", audio_manager)
+
+	print("All nodes assigned")
 
 	save_manager = SaveManager.new()
 	add_child(save_manager)
@@ -69,13 +65,16 @@ func _ready():
 		)
 
 	if audio_manager:
+		print("Playing background music...")
 		audio_manager.play_music("background", -5.0)
 
 	game_active = true
+	print("Resetting run...")
 	GameState.reset_run()
 
 	wave_timer = 2.0
 	print("=== GAME READY ===")
+	print("Game viewport size: ", get_viewport().get_visible_rect().size)
 
 func _process(delta):
 	if game_active and not get_tree().paused:
