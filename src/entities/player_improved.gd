@@ -27,13 +27,19 @@ func _ready():
 	_setup_sprite()
 
 func _setup_sprite():
+	print("Setting up player sprite...")
 	if not has_node("Sprite2D"):
+		print("Creating Sprite2D node...")
 		var sprite = Sprite2D.new()
 		add_child(sprite)
 
 	var sprite = $Sprite2D
-	sprite.texture = SpriteGenerator.generate_player_sprite()
+	print("Generating player sprite texture...")
+	var texture = SpriteGenerator.generate_player_sprite()
+	print("Texture generated: ", texture != null)
+	sprite.texture = texture
 	sprite.centered = true
+	print("Player sprite setup complete")
 
 func _physics_process(delta):
 	if not is_alive:

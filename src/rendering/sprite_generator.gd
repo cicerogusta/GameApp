@@ -2,12 +2,13 @@ extends Node
 
 
 static func generate_player_sprite() -> Texture2D:
+	print("Generating player sprite...")
 	var image = Image.create(64, 64, false, Image.FORMAT_RGBA8)
 
 	# Dark background
 	for y in range(64):
 		for x in range(64):
-			image.set_pixel(x, y, Color(0.1, 0.1, 0.18, 0))
+			image.set_pixel(x, y, Color(0.1, 0.1, 0.18, 1))
 
 	# Draw eye (cyan circle)
 	var eye_pos = Vector2(32, 20)
