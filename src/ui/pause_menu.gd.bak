@@ -32,7 +32,7 @@ func toggle_pause():
 	else:
 		_hide_pause_menu()
 
-	pause_toggled.emit(is_paused)
+	emit_signal("pause_toggled", is_paused)
 
 func _show_pause_menu():
 	panel.visible = true

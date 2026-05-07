@@ -52,7 +52,7 @@ func _create_upgrade_button(upgrade: Dictionary) -> Button:
 func _on_upgrade_selected(upgrade: Dictionary):
 	get_tree().paused = false
 	selected_upgrade = upgrade
-	upgrade_selected.emit(upgrade)
+	emit_signal("upgrade_selected", upgrade)
 
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_CUBIC)

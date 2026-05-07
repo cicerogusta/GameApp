@@ -18,14 +18,14 @@ func spawn_echo(position: Vector2):
 		get_parent().add_child(echo)
 		active_echoes.append(echo)
 		echo.collected.connect(_on_echo_collected.bind(echo))
-		echo_spawned.emit(position)
+		emit_signal("echo_spawned", position)
 		return echo
 	return null
 
 func _on_echo_collected(echo: EchoImproved):
 	if echo in active_echoes:
 		active_echoes.erase(echo)
-		echo_consumed.emit(echo)
+		emit_signal("echo_consumed", echo)
 
 func get_echo_count() -> int:
 	return active_echoes.size()

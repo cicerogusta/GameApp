@@ -36,14 +36,14 @@ func _update_direction():
 func take_damage(amount: int = 1):
 	if is_alive:
 		health -= amount
-		took_damage.emit(health)
+		emit_signal("took_damage", health)
 		if health <= 0:
 			die()
 
 func die():
 	if is_alive:
 		is_alive = false
-		defeated.emit
+		emit_signal("defeated")
 		GameState.add_coins(echo_reward)
 		await get_tree().process_frame
 		queue_free()

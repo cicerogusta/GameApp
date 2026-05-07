@@ -28,7 +28,7 @@ func start_wave():
 	enemies_defeated = 0
 	wave_active = true
 	GameState.next_wave()
-	wave_started.emit(current_wave)
+	emit_signal("wave_started", current_wave)
 	_spawn_enemies()
 
 func _spawn_enemies():
@@ -58,7 +58,7 @@ func _on_enemy_defeated():
 	enemies_defeated += 1
 	if enemies_defeated >= enemies_spawned and enemies_spawned > 0:
 		wave_active = false
-		wave_completed.emit(current_wave)
+		emit_signal("wave_completed", current_wave)
 
 func should_spawn_boss() -> bool:
 	return current_wave % Constants.WAVE_BOSS_INTERVAL == 0

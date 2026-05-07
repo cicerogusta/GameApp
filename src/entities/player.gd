@@ -61,18 +61,18 @@ func _handle_attack(delta):
 func _perform_attack():
 	var mouse_pos = get_global_mouse_position()
 	var attack_dir = (mouse_pos - global_position).normalized()
-	emit_signal("attack_performed", global_position, attack_dir)
+	attack_performed.emit(global_position, attack_dir)
 
 func take_damage():
 	if is_alive:
 		health -= 1
-		emit_signal("health_changed", health)
+		health_changed.emit(health)
 		if health <= 0:
 			die()
 
 func die():
 	is_alive = false
-	emit_signal("died")
+	died.emit
 
 func collect_echo(boost_type: String = ""):
 	stored_echoes += 1

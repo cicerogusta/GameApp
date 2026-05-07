@@ -28,13 +28,13 @@ func offer_upgrades():
 		indices.append(idx)
 		selected.append(available_upgrades[idx])
 
-	upgrade_offered.emit(selected)
+	emit_signal("upgrade_offered", selected)
 	return selected
 
 func apply_upgrade(upgrade: Dictionary):
 	if upgrade in available_upgrades:
 		GameState.add_upgrade(upgrade["name"])
-		upgrade_selected.emit(upgrade)
+		emit_signal("upgrade_selected", upgrade)
 
 		# Play level-up sound
 		var audio_mgr = get_tree().root.get_node("Game/AudioManager")

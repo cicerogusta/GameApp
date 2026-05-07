@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name PlayerImproved
+class_name Player
 
 @export var speed: float = Constants.PLAYER_SPEED
 @export var damage: int = Constants.PLAYER_DAMAGE
@@ -16,24 +16,12 @@ signal health_changed(health: int)
 signal attack_performed(position: Vector2, direction: Vector2)
 signal echo_collected(amount: int)
 signal died
-signal took_damage
 
 func _ready():
 	add_to_group("player")
 	health = 3 + GameState.permanent_upgrades.get("health", 0)
 	speed = Constants.PLAYER_SPEED * (1.0 + GameState.permanent_upgrades.get("speed", 0) * 0.15)
 	damage = Constants.PLAYER_DAMAGE + GameState.permanent_upgrades.get("damage", 0) * 2
-
-	_setup_sprite()
-
-func _setup_sprite():
-	if not has_node("Sprite2D"):
-		var sprite = Sprite2D.new()
-		add_child(sprite)
-
-	var sprite = $Sprite2D
-	sprite.texture = SpriteGenerator.generate_player_sprite()
-	sprite.centered = true
 
 func _physics_process(delta):
 	if not is_alive:
@@ -73,65 +61,18 @@ func _handle_attack(delta):
 func _perform_attack():
 	var mouse_pos = get_global_mouse_position()
 	var attack_dir = (mouse_pos - global_position).normalized()
-	attack_performed.emit(global_position, attack_dir)
-
-	# Visual feedback
-	_play_attack_feedback()
-
-func _play_attack_feedback():
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
-	scale = Vector2(1.2, 1.2)
-	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.1)
+	emit_signal("attack_performed", global_position, attack_dir)
 
 func take_damage():
 	if is_alive:
 		health -= 1
-		health_changed.emit(health)
-		took_damage.emit
-
-		# Hit flash effect
-		_play_hit_feedback()
-
+		emit_signal("health_changed", health)
 		if health <= 0:
 			die()
 
-func _play_hit_feedback():
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_OUT)
-
-	modulate = Color.RED
-	tween.tween_property(self, "modulate", Color.WHITE, 0.15)
-
-	# Screen shake
-	var feedback = get_tree().root.get_node("Game/VisualFeedback")
-	if feedback:
-		feedback.screen_shake(0.3, 0.1)
-
 func die():
-	if is_alive:
-		is_alive = false
-		died.emit
-
-		# Death animation
-		_play_death_feedback()
-
-func _play_death_feedback():
-	var tween = create_tween()
-	tween.set_trans(Tween.TRANS_CUBIC)
-	tween.set_ease(Tween.EASE_IN)
-
-	tween.tween_property(self, "modulate:a", 0.0, 0.5)
-	tween.set_parallel(true)
-	tween.tween_property(self, "scale", Vector2(0.5, 0.5), 0.5)
-
-	# Particle burst
-	var feedback = get_tree().root.get_node("Game/VisualFeedback")
-	if feedback:
-		feedback.particle_burst(global_position, Constants.COLOR_PURPLE, 20)
-		feedback.screen_shake(1.0, 0.3)
+	is_alive = false
+	emit_signal("died")
 
 func collect_echo(boost_type: String = ""):
 	stored_echoes += 1

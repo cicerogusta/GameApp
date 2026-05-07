@@ -50,7 +50,7 @@ func _update_direction():
 func take_damage(amount: int = 1):
 	if is_alive:
 		health -= amount
-		took_damage.emit(health)
+		emit_signal("took_damage", health)
 
 		# Hit feedback
 		_play_hit_feedback()
@@ -81,7 +81,7 @@ func _play_hit_feedback():
 func die():
 	if is_alive:
 		is_alive = false
-		defeated.emit
+		emit_signal("defeated")
 		GameState.add_coins(echo_reward)
 
 		# Death effect

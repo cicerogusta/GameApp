@@ -110,7 +110,7 @@ func play_music(track_name: String = "background", volume_db: float = -5.0):
 	tween.set_ease(Tween.EASE_OUT)
 	tween.tween_property(music_player, "volume_db", volume_db, 0.5)
 
-	music_started.emit(track_name)
+	emit_signal("music_started", track_name)
 
 func stop_music(fade_time: float = 0.5):
 	var tween = create_tween()
@@ -127,7 +127,7 @@ func play_sfx(sfx_name: String, volume_db: float = 0.0):
 		player.stream = loaded_sfx[sfx_name]
 		player.volume_db = volume_db
 		player.play()
-		sfx_played.emit(sfx_name)
+		emit_signal("sfx_played", sfx_name)
 		return
 
 	# Fallback to procedural
@@ -148,14 +148,14 @@ func play_sfx(sfx_name: String, volume_db: float = 0.0):
 		sfx_players[sfx_name].stream = sound
 		sfx_players[sfx_name].play()
 
-	sfx_played.emit(sfx_name)
+	emit_signal("sfx_played", sfx_name)
 
 func set_master_volume(volume: float):
 	master_volume = clamp(volume, 0.0, 1.0)
 	var db = linear2db(master_volume)
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), master_volume < 0.01)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db)
-	volume_changed.emit(master_volume)
+	emit_signal("volume_changed", master_volume)
 
 func set_music_volume(volume: float):
 	var db = linear2db(clamp(volume, 0.0, 1.0))

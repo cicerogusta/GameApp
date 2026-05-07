@@ -19,4 +19,4 @@ func show_upgrade_menu(upgrades: Array):
 		upgrade_selection.show_upgrades(upgrades)
 
 func _on_upgrade_selected(upgrade: Dictionary):
-	upgrade_chosen.emit(upgrade)
+	emit_signal("upgrade_chosen", upgrade)

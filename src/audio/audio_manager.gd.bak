@@ -69,7 +69,7 @@ func stop_music(fade_time: float = 0.5):
 func set_master_volume(volume: float):
 	master_volume = clamp(volume, 0.0, 1.0)
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), master_volume < 0.01)
-	volume_changed.emit(master_volume)
+	emit_signal("volume_changed", master_volume)
 
 func set_sfx_volume(volume: float):
 	sfx_volume = clamp(volume, 0.0, 1.0)
