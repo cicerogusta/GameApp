@@ -23,18 +23,18 @@ func _ready():
 func _create_audio_buses():
 	# Create Master bus
 	if AudioServer.get_bus_index("Master") == -1:
-		AudioServer.add_bus(AudioServer.bus_count)
-		AudioServer.get_bus(AudioServer.bus_count - 1).name = "Master"
+		var bus_idx = AudioServer.add_bus(AudioServer.bus_count)
+		AudioServer.set_bus_name(bus_idx, "Master")
 
 	# Create Music bus
 	if AudioServer.get_bus_index("Music") == -1:
-		AudioServer.add_bus(AudioServer.bus_count)
-		AudioServer.get_bus(AudioServer.bus_count - 1).name = "Music"
+		var bus_idx = AudioServer.add_bus(AudioServer.bus_count)
+		AudioServer.set_bus_name(bus_idx, "Music")
 
 	# Create SFX bus
 	if AudioServer.get_bus_index("SFX") == -1:
-		AudioServer.add_bus(AudioServer.bus_count)
-		AudioServer.get_bus(AudioServer.bus_count - 1).name = "SFX"
+		var bus_idx = AudioServer.add_bus(AudioServer.bus_count)
+		AudioServer.set_bus_name(bus_idx, "SFX")
 
 func _create_players():
 	# Music player
