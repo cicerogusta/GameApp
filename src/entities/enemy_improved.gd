@@ -81,7 +81,7 @@ func _play_hit_feedback():
 func die():
 	if is_alive:
 		is_alive = false
-		defeated.emit
+		defeated.emit()
 		GameState.add_coins(echo_reward)
 
 		# Death effect

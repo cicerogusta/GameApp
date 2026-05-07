@@ -7,8 +7,8 @@ class_name MainMenuUI
 @onready var start_button = $PanelContainer/VBoxContainer/ButtonContainer/StartButton
 @onready var quit_button = $PanelContainer/VBoxContainer/ButtonContainer/QuitButton
 @onready var version_label = $VersionLabel
-@onready var glow_timer = 0.0
 
+var glow_timer: float = 0.0
 var save_manager: SaveManager
 
 func _ready():

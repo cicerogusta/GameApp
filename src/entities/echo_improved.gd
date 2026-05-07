@@ -65,7 +65,7 @@ func _on_area_entered(area):
 		collect()
 
 func collect():
-	collected.emit
+	collected.emit()
 
 	# Collection feedback
 	var tween = create_tween()

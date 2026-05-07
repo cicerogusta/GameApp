@@ -1,11 +1,13 @@
 extends Node2D
 
-var player: Player = null
+var player: PlayerImproved = null
 var hud: GameHUDImproved = null
 var wave_manager: WaveManager = null
 var echo_system: EchoSystem = null
 var upgrade_manager: UpgradeManager = null
 var pause_menu: PauseMenu = null
+var wave_indicator: WaveIndicator = null
+var upgrade_selection: UpgradeSelection = null
 var save_manager: SaveManager = null
 var audio_manager: AudioManagerPro = null
 
@@ -23,6 +25,8 @@ func _ready():
 	echo_system = $EchoSystem
 	upgrade_manager = $UpgradeManager
 	pause_menu = $PauseMenu
+	wave_indicator = $WaveIndicator
+	upgrade_selection = $UpgradeSelection
 	hud = $HUD
 	audio_manager = $AudioManager
 
@@ -32,9 +36,27 @@ func _ready():
 	if pause_menu:
 		pause_menu.pause_toggled.connect(_on_pause_toggled)
 
+	if wave_manager and wave_indicator:
+		wave_manager.wave_started.connect(wave_indicator.show_wave)
+
+	if wave_manager and upgrade_manager and upgrade_selection:
+		wave_manager.upgrade_time.connect(func():
+			var upgrades = upgrade_manager.offer_upgrades()
+			upgrade_selection.show_upgrades(upgrades)
+		)
+		upgrade_selection.upgrade_selected.connect(_on_upgrade_selected)
+
+	if echo_system:
+		echo_system.echo_spawned.connect(func(_pos):
+			if audio_manager:
+				audio_manager.play_sfx("echo_collect", 0.0)
+		)
+		echo_system.echo_consumed.connect(func(echo):
+			GameState.add_coins(5)
+		)
+
 	if audio_manager:
 		audio_manager.play_music("background", -5.0)
-		echo_system.echo_spawned.connect(func(_pos): audio_manager.play_sfx("echo_collect", 0.0))
 
 	game_active = true
 	GameState.reset_run()
@@ -76,6 +98,9 @@ func _on_pause_toggled(paused: bool):
 func _on_player_took_damage():
 	if audio_manager:
 		audio_manager.play_sfx("hit", -3.0)
+
+func _on_upgrade_selected(upgrade: Dictionary):
+	upgrade_manager.apply_upgrade(upgrade)
 
 func _on_player_died():
 	if audio_manager:

@@ -17,6 +17,7 @@ var spawn_timer: float = 0.0
 signal wave_started(wave: int)
 signal wave_completed(wave: int)
 signal boss_approaching(wave: int)
+signal upgrade_time
 
 func _process(delta):
 	if wave_active and spawn_timer > 0:
@@ -56,6 +57,11 @@ func _get_random_spawn_position() -> Vector2:
 
 func _on_enemy_defeated():
 	enemies_defeated += 1
+
+	# Check if time for upgrade
+	if enemies_defeated % Constants.WAVE_UPGRADE_INTERVAL == 0:
+		upgrade_time.emit()
+
 	if enemies_defeated >= enemies_spawned and enemies_spawned > 0:
 		wave_active = false
 		wave_completed.emit(current_wave)

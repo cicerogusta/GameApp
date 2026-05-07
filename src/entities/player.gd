@@ -72,7 +72,7 @@ func take_damage():
 
 func die():
 	is_alive = false
-	died.emit
+	died.emit()
 
 func collect_echo(boost_type: String = ""):
 	stored_echoes += 1

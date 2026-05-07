@@ -16,6 +16,7 @@ config/icon="res://assets/icon.svg"
 GameState="*res://src/utils/game_state.gd"
 Constants="*res://src/utils/constants.gd"
 SoundGenerator="*res://src/systems/sound_generator.gd"
+SpriteGenerator="*res://src/rendering/sprite_generator.gd"
 
 [debug]
 

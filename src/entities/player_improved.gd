@@ -89,7 +89,7 @@ func take_damage():
 	if is_alive:
 		health -= 1
 		health_changed.emit(health)
-		took_damage.emit
+		took_damage.emit()
 
 		# Hit flash effect
 		_play_hit_feedback()
@@ -113,7 +113,7 @@ func _play_hit_feedback():
 func die():
 	if is_alive:
 		is_alive = false
-		died.emit
+		died.emit()
 
 		# Death animation
 		_play_death_feedback()

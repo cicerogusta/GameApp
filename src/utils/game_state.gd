@@ -40,7 +40,7 @@ func take_damage():
 	current_health -= 1
 	health_changed.emit(current_health)
 	if current_health <= 0:
-		game_over.emit
+		game_over.emit()
 
 func next_wave():
 	current_wave += 1

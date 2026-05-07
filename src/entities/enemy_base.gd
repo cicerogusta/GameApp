@@ -43,7 +43,7 @@ func take_damage(amount: int = 1):
 func die():
 	if is_alive:
 		is_alive = false
-		defeated.emit
+		defeated.emit()
 		GameState.add_coins(echo_reward)
 		await get_tree().process_frame
 		queue_free()
