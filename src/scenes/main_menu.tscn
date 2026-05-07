@@ -11,11 +11,15 @@ border_width_right = 4
 border_width_bottom = 4
 
 [node name="MainMenu" type="Control"]
-layout_mode = 3
+layout_mode = 1
 anchors_left = 0.0
 anchors_top = 0.0
 anchors_right = 1.0
 anchors_bottom = 1.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 script = ExtResource("1_menu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
