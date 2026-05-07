@@ -32,6 +32,10 @@ shape = CapsuleShape2D.new()
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+enabled = true
+
 [node name="WaveManager" type="Node" parent="."]
 script = ExtResource("3_wave")
 
