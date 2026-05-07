@@ -1,8 +1,8 @@
 extends Node
 
 # Game constants
-const WINDOW_WIDTH = 1280
-const WINDOW_HEIGHT = 720
+const WINDOW_WIDTH = 1920
+const WINDOW_HEIGHT = 1080
 const TILE_SIZE = 32
 
 # Player
