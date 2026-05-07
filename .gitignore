@@ -1,6 +1,5 @@
 # Godot
 .godot/
-*.godot
 *.import
 *.tres.uuid
 
