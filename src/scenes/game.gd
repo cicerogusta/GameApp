@@ -17,20 +17,31 @@ var game_active: bool = false
 var wave_timer: float = 0.0
 
 func _ready():
+	print("=== GAME STARTING ===")
+
 	player = $Player
+	print("Player: ", player)
 	if player:
 		player.attack_performed.connect(_on_player_attack)
 		player.died.connect(_on_player_died)
 		player.took_damage.connect(_on_player_took_damage)
 
 	wave_manager = $WaveManager
+	print("WaveManager: ", wave_manager)
 	echo_system = $EchoSystem
+	print("EchoSystem: ", echo_system)
 	upgrade_manager = $UpgradeManager
+	print("UpgradeManager: ", upgrade_manager)
 	pause_menu = $PauseMenu
+	print("PauseMenu: ", pause_menu)
 	wave_indicator = $WaveIndicator
+	print("WaveIndicator: ", wave_indicator)
 	upgrade_selection = $UpgradeSelection
+	print("UpgradeSelection: ", upgrade_selection)
 	hud = $HUD
+	print("HUD: ", hud)
 	audio_manager = $AudioManager
+	print("AudioManager: ", audio_manager)
 
 	save_manager = SaveManager.new()
 	add_child(save_manager)
@@ -64,6 +75,7 @@ func _ready():
 	GameState.reset_run()
 
 	wave_timer = 2.0
+	print("=== GAME READY ===")
 
 func _process(delta):
 	if game_active and not get_tree().paused:
