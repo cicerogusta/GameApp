@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://c9z8x7w6v5u4"]
+[gd_scene load_steps=3 format=3 uid="uid://c9z8x7w6v5u4"]
 
 [ext_resource type="Script" path="res://src/ui/main_menu_ui.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat" id="1_panel_style"]
+bg_color = Color(0.08, 0.08, 0.12, 0.95)
+border_color = Color(0, 0.85, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -28,41 +36,53 @@ offset_left = -300.0
 offset_top = -250.0
 offset_right = 300.0
 offset_bottom = 250.0
-
-[node name="PanelStyle" type="StyleBoxFlat"]
-bg_color = Color(0.08, 0.08, 0.12, 0.95)
-border_color = Color(0, 0.85, 1, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+theme_override_styles/panel = SubResource("1_panel_style")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "VOID EATER"
 theme_override_font_sizes/font_size = 80
+theme_override_colors/font_color = Color(0, 0.85, 1, 1)
+horizontal_alignment = 1
 
 [node name="TaglineLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Consume. Evolve. Ascend."
+theme_override_colors/font_color = Color(0.62, 0, 1, 1)
+horizontal_alignment = 1
+
+[node name="Separator" type="Control" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 20)
 
 [node name="StatsLabel" type="Label" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Best Wave: 0\nTotal Coins: 0"
+text = "Best Wave: 0
+Total Coins: 0"
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ButtonContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="StartButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 text = "INICIAR JOGO"
+theme_override_font_sizes/font_size = 24
 
 [node name="QuitButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonContainer"]
 layout_mode = 2
 text = "SAIR"
+theme_override_font_sizes/font_size = 24
 
 [node name="VersionLabel" type="Label" parent="."]
 offset_left = 20.0
@@ -70,3 +90,4 @@ offset_top = 680.0
 offset_right = 150.0
 offset_bottom = 710.0
 text = "v1.0.0 - Alpha"
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)

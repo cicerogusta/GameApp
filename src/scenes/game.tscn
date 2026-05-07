@@ -51,26 +51,21 @@ script = ExtResource("7_pause")
 
 [node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
 visible = false
-offset_left = 320.0
-offset_top = 144.0
-offset_right = 960.0
-offset_bottom = 576.0
-
-[node name="PausePanel" type="StyleBoxFlat"]
-bg_color = Color(0.08, 0.08, 0.12, 0.95)
-border_color = Color(0.157, 0, 1, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+anchors_left = 0.25
+anchors_top = 0.2
+anchors_right = 0.75
+anchors_bottom = 0.8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="PauseLabel" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "PAUSADO"
 theme_override_font_sizes/font_size = 60
+theme_override_colors/font_color = Color(0.157, 0, 1, 1)
+horizontal_alignment = 1
 
 [node name="Spacer" type="Control" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -78,15 +73,21 @@ size_flags_vertical = 3
 
 [node name="ResumeButton" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "CONTINUAR"
+text = "CONTINUAR (ESC)"
+theme_override_font_sizes/font_size = 24
+custom_minimum_size = Vector2(300, 60)
 
 [node name="SettingsButton" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "CONFIGURAÇÕES"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(300, 50)
 
 [node name="MenuButton" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "MENU"
+text = "MENU PRINCIPAL"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(300, 50)
 
 [node name="UpgradeSelection" type="CanvasLayer" parent="."]
 layer = 102
@@ -94,18 +95,10 @@ script = ExtResource("8_upgrade_sel")
 
 [node name="PanelContainer2" type="PanelContainer" parent="UpgradeSelection"]
 visible = false
-offset_left = 128.0
-offset_top = 108.0
-offset_right = 1152.0
-offset_bottom = 612.0
-
-[node name="UpgradePanel" type="StyleBoxFlat"]
-bg_color = Color(0.08, 0.08, 0.12, 0.95)
-border_color = Color(0, 0.85, 1, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+anchors_left = 0.1
+anchors_top = 0.15
+anchors_right = 0.9
+anchors_bottom = 0.85
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="UpgradeSelection/PanelContainer2"]
 layout_mode = 2
@@ -113,8 +106,11 @@ layout_mode = 2
 [node name="TitleLabel" type="Label" parent="UpgradeSelection/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 text = "ESCOLHA SEU UPGRADE"
+theme_override_font_sizes/font_size = 40
+theme_override_colors/font_color = Color(0, 0.85, 1, 1)
+horizontal_alignment = 1
 
-[node name="GridContainer" type="GridContainer" parent="UpgradeSelection/PanelContainer2/VBoxContainer2"]
+[node name="UpgradesContainer" type="GridContainer" parent="UpgradeSelection/PanelContainer2/VBoxContainer2"]
 layout_mode = 2
 columns = 3
 

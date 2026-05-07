@@ -9,6 +9,7 @@ script = ExtResource("1_bloat")
 shape = BoxShape2D.new()
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+centered = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
