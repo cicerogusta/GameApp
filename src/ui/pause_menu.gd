@@ -12,7 +12,7 @@ var is_paused: bool = false
 signal pause_toggled(paused: bool)
 
 func _ready():
-	modulate.a = 0
+	self.modulate.a = 0
 	panel.visible = false
 
 	resume_button.pressed.connect(_on_resume_pressed)

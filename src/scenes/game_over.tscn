@@ -1,88 +1,50 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3cq8l8f3dq5"]
+[gd_scene load_steps=2 format=3 uid="uid://dxcy123456789"]
 
-[ext_resource type="Script" path="res://src/ui/game_over_ui.gd"]
+[ext_resource type="Script" path="res://src/ui/game_over_ui.gd" id="1_gameover"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
-anchors_rect = Rect2(0, 0, 1, 1)
-script = ExtResource("1")
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
+script = ExtResource("1_gameover")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_rect = Rect2(0, 0, 1, 1)
+anchors_left = 0.0
+anchors_top = 0.0
+anchors_right = 1.0
+anchors_bottom = 1.0
 color = Color(0.1, 0.1, 0.18, 1)
-
-[node name="GlowBG" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_rect = Rect2(0, 0, 1, 1)
-color = Color(0.35, 0.05, 0.05, 0.1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_left = 0.15
-anchors_top = 0.1
-anchors_right = 0.85
-anchors_bottom = 0.9
-alignment = 1
+anchors_left = 0.5
+anchors_top = 0.5
+anchors_right = 0.5
+anchors_bottom = 0.5
+offset_left = -320.0
+offset_top = -240.0
+offset_right = 320.0
+offset_bottom = 240.0
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 text = "GAME OVER"
 theme_override_font_sizes/font_size = 80
-theme_override_colors/font_color = Color(1, 0, 0.4, 1)
-horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="VBoxContainer"]
+[node name="StatsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="StatsContainer" type="VBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="WaveLabel" type="Label" parent="VBoxContainer/StatsContainer"]
-layout_mode = 2
-text = "Wave Atingida: 0"
-theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(0, 0.85, 1, 1)
-horizontal_alignment = 1
-
-[node name="CoinsLabel" type="Label" parent="VBoxContainer/StatsContainer"]
-layout_mode = 2
-text = "Moedas Ganhas: 0"
-theme_override_font_sizes/font_size = 28
-theme_override_colors/font_color = Color(1, 1, 0, 1)
-horizontal_alignment = 1
-
-[node name="BestLabel" type="Label" parent="VBoxContainer/StatsContainer"]
-layout_mode = 2
-text = "Melhor Wave: 0"
-theme_override_font_sizes/font_size = 24
-theme_override_colors/font_color = Color(0.157, 0, 1, 0.8)
-horizontal_alignment = 1
-
-[node name="Spacer2" type="Control" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
+text = "STATS"
 
 [node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-alignment = 1
 
 [node name="RetryButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 text = "TENTAR NOVAMENTE"
-theme_override_font_sizes/font_size = 24
-theme_override_colors/font_color = Color(0, 0.85, 1, 1)
-custom_minimum_size = Vector2(300, 70)
-
-[node name="Spacer3" type="Control" parent="VBoxContainer/ButtonContainer"]
-layout_mode = 2
-custom_minimum_size = Vector2(50, 0)
 
 [node name="MenuButton" type="Button" parent="VBoxContainer/ButtonContainer"]
 layout_mode = 2
 text = "MENU"
-theme_override_font_sizes/font_size = 24
-theme_override_colors/font_color = Color(1, 0, 0.4, 1)
-custom_minimum_size = Vector2(200, 70)

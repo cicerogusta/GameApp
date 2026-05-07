@@ -1,13 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://bl5l5m5m5m5m5"]
+[gd_scene load_steps=2 format=3 uid="uid://c1x2y3z4a5b6"]
 
-[ext_resource type="Script" path="res://src/entities/specter_improved.gd"]
+[ext_resource type="Script" path="res://src/entities/specter_improved.gd" id="1_abc12"]
 
-[node name="Specter" type="CharacterBody2D"]
-script = ExtResource("1")
+[node name="SpecterImproved" type="CharacterBody2D"]
+script = ExtResource("1_abc12")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = CircleShape2D.new()
-shape.radius = 8.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
@@ -15,4 +14,3 @@ shape.radius = 8.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 shape = CircleShape2D.new()
-shape.radius = 12.0

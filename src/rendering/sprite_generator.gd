@@ -1,6 +1,5 @@
 extends Node
 
-class_name SpriteGenerator
 
 static func generate_player_sprite() -> Texture2D:
 	var image = Image.create(64, 64, false, Image.FORMAT_RGBA8)

@@ -6,7 +6,7 @@ class_name LoadingScreen
 @onready var label: Label = Label.new()
 
 func _ready():
-	modulate.a = 0
+	self.modulate.a = 0
 
 func show_loading():
 	var tween = create_tween()

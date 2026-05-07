@@ -44,7 +44,7 @@ func apply_upgrade(upgrade: Dictionary):
 		return true
 	return false
 
-func get_upgrade_effect(upgrade_name: str) -> float:
+func get_upgrade_effect(upgrade_name: String) -> float:
 	match upgrade_name:
 		"Damage Boost":
 			return 1.2

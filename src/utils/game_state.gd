@@ -48,5 +48,5 @@ func next_wave():
 		best_wave = current_wave
 	wave_changed.emit(current_wave)
 
-func add_upgrade(upgrade_name: str):
+func add_upgrade(upgrade_name: String):
 	current_run_upgrades.append(upgrade_name)

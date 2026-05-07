@@ -30,8 +30,8 @@ func _setup_buses():
 	var master_bus = AudioServer.get_bus_index("Master")
 	if master_bus == -1:
 		AudioServer.add_bus(AudioServer.bus_count)
-		var new_bus = AudioServer.get_bus(AudioServer.bus_count - 1)
-		new_bus.name = "Master"
+		var idx = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(idx, "Master")
 
 func play_sfx(sfx_name: String, volume_db: float = 0.0):
 	if sfx_name not in sfx_players:

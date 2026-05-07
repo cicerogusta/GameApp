@@ -1,7 +1,5 @@
 extends Node
 
-class_name SoundGenerator
-
 static func generate_sine_tone(frequency: float = 440.0, duration: float = 0.1, sample_rate: int = 44100) -> AudioStreamWAV:
 	var wav = AudioStreamWAV.new()
 	wav.sample_rate = sample_rate
@@ -17,7 +15,7 @@ static func generate_sine_tone(frequency: float = 440.0, duration: float = 0.1, 
 	var packed_data = PackedByteArray()
 	for sample in samples:
 		var int_sample = int(sample * 32767)
-		packed_data.append_array(int_sample.to_bytes(2, Endian.LITTLE))
+		packed_data.append_array(int_sample.to_bytes(2, 1))
 
 	wav.data = packed_data
 	return wav
@@ -42,7 +40,7 @@ static func generate_attack_sfx() -> AudioStreamWAV:
 	var packed_data = PackedByteArray()
 	for sample in samples:
 		var int_sample = int(sample * 32767)
-		packed_data.append_array(int_sample.to_bytes(2, Endian.LITTLE))
+		packed_data.append_array(int_sample.to_bytes(2, 1))
 
 	wav.data = packed_data
 	return wav
@@ -68,7 +66,7 @@ static func generate_hit_sfx() -> AudioStreamWAV:
 	var packed_data = PackedByteArray()
 	for sample in samples:
 		var int_sample = int(sample * 32767)
-		packed_data.append_array(int_sample.to_bytes(2, Endian.LITTLE))
+		packed_data.append_array(int_sample.to_bytes(2, 1))
 
 	wav.data = packed_data
 	return wav
@@ -93,7 +91,7 @@ static func generate_pickup_sfx() -> AudioStreamWAV:
 	var packed_data = PackedByteArray()
 	for sample in samples:
 		var int_sample = int(sample * 32767)
-		packed_data.append_array(int_sample.to_bytes(2, Endian.LITTLE))
+		packed_data.append_array(int_sample.to_bytes(2, 1))
 
 	wav.data = packed_data
 	return wav
@@ -127,7 +125,7 @@ static func generate_levelup_sfx() -> AudioStreamWAV:
 	var packed_data = PackedByteArray()
 	for sample in samples:
 		var int_sample = int(sample * 32767)
-		packed_data.append_array(int_sample.to_bytes(2, Endian.LITTLE))
+		packed_data.append_array(int_sample.to_bytes(2, 1))
 
 	wav.data = packed_data
 	return wav

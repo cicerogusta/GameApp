@@ -23,18 +23,21 @@ func _ready():
 func _create_audio_buses():
 	# Create Master bus
 	if AudioServer.get_bus_index("Master") == -1:
-		var bus_idx = AudioServer.add_bus(AudioServer.bus_count)
-		AudioServer.set_bus_name(bus_idx, "Master")
+		AudioServer.add_bus(AudioServer.bus_count)
+		var idx = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(idx, "Master")
 
 	# Create Music bus
 	if AudioServer.get_bus_index("Music") == -1:
-		var bus_idx = AudioServer.add_bus(AudioServer.bus_count)
-		AudioServer.set_bus_name(bus_idx, "Music")
+		AudioServer.add_bus(AudioServer.bus_count)
+		var idx = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(idx, "Music")
 
 	# Create SFX bus
 	if AudioServer.get_bus_index("SFX") == -1:
-		var bus_idx = AudioServer.add_bus(AudioServer.bus_count)
-		AudioServer.set_bus_name(bus_idx, "SFX")
+		AudioServer.add_bus(AudioServer.bus_count)
+		var idx = AudioServer.bus_count - 1
+		AudioServer.set_bus_name(idx, "SFX")
 
 func _create_players():
 	# Music player
@@ -152,17 +155,17 @@ func play_sfx(sfx_name: String, volume_db: float = 0.0):
 
 func set_master_volume(volume: float):
 	master_volume = clamp(volume, 0.0, 1.0)
-	var db = linear2db(master_volume)
+	var db = linear_to_db(master_volume)
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), master_volume < 0.01)
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), db)
 	volume_changed.emit(master_volume)
 
 func set_music_volume(volume: float):
-	var db = linear2db(clamp(volume, 0.0, 1.0))
+	var db = linear_to_db(clamp(volume, 0.0, 1.0))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), db)
 
 func set_sfx_volume(volume: float):
-	var db = linear2db(clamp(volume, 0.0, 1.0))
+	var db = linear_to_db(clamp(volume, 0.0, 1.0))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), db)
 
 func get_loaded_sfx_list() -> Array:

@@ -12,7 +12,7 @@ var selected_upgrade: Dictionary = {}
 signal upgrade_selected(upgrade: Dictionary)
 
 func _ready():
-	modulate.a = 0
+	self.modulate.a = 0
 	panel.visible = false
 	container.columns = 3
 
