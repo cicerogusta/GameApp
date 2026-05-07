@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://kl5q3qdcd3ll"]
+[gd_scene load_steps=13 format=3 uid="uid://kl5q3qdcd3ll"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_game"]
 [ext_resource type="Script" path="res://src/entities/player_improved.gd" id="2_player"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/ui/visual_feedback.gd" id="9_visual"]
 [ext_resource type="Script" path="res://src/ui/wave_indicator.gd" id="10_wave_ind"]
 [ext_resource type="Script" path="res://src/audio/audio_manager_pro.gd" id="11_audio"]
+[ext_resource type="Script" path="res://src/systems/parallax_manager.gd" id="12_parallax"]
 
 [sub_resource type="CapsuleShape2D" id="1_capsule"]
 radius = 16.0
@@ -23,6 +24,9 @@ script = ExtResource("1_game")
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0.1, 0.1, 0.18, 1)
+
+[node name="ParallaxManager" type="Node2D" parent="."]
+script = ExtResource("12_parallax")
 
 [node name="AudioManager" type="Node" parent="."]
 script = ExtResource("11_audio")

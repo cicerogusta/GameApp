@@ -20,6 +20,12 @@ signal took_damage
 
 func _ready():
 	add_to_group("player")
+
+	# Register camera for parallax system
+	if has_node("Camera2D"):
+		var camera = $Camera2D
+		camera.add_to_group("camera")
+
 	health = 3 + GameState.permanent_upgrades.get("health", 0)
 	speed = Constants.PLAYER_SPEED * (1.0 + GameState.permanent_upgrades.get("speed", 0) * 0.15)
 	damage = Constants.PLAYER_DAMAGE + GameState.permanent_upgrades.get("damage", 0) * 2
