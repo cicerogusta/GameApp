@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://kl5q3qdcd3ll"]
+[gd_scene load_steps=12 format=3 uid="uid://kl5q3qdcd3ll"]
 
 [ext_resource type="Script" path="res://src/scenes/game.gd" id="1_game"]
 [ext_resource type="Script" path="res://src/entities/player_improved.gd" id="2_player"]
@@ -11,6 +11,10 @@
 [ext_resource type="Script" path="res://src/ui/visual_feedback.gd" id="9_visual"]
 [ext_resource type="Script" path="res://src/ui/wave_indicator.gd" id="10_wave_ind"]
 [ext_resource type="Script" path="res://src/audio/audio_manager_pro.gd" id="11_audio"]
+
+[sub_resource type="CapsuleShape2D" id="1_capsule"]
+radius = 16.0
+height = 40.0
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_game")
@@ -28,7 +32,7 @@ position = Vector2(960, 540)
 script = ExtResource("2_player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = CapsuleShape2D.new()
+shape = SubResource("1_capsule")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 
@@ -125,3 +129,4 @@ script = ExtResource("9_visual")
 [node name="WaveIndicator" type="CanvasLayer" parent="."]
 layer = 50
 script = ExtResource("10_wave_ind")
+
